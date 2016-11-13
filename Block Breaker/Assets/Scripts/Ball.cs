@@ -3,13 +3,14 @@ using System.Collections;
 
 public class Ball : MonoBehaviour {
 
-	public Paddle paddle;
+	private Paddle paddle;
 
 	private Vector3 paddleToBallVector;
 	private Rigidbody2D rigidBody;
 	private bool hasGameStarted;
 
 	void Start() {
+		paddle = GameObject.FindObjectOfType<Paddle>();
 		paddleToBallVector = GetPaddleToBallVector();
 		rigidBody = this.GetComponent<Rigidbody2D>();
 		hasGameStarted = false;
