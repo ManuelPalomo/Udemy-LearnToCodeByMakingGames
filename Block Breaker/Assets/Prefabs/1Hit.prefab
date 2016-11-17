@@ -24,7 +24,7 @@ GameObject:
   - 114: {fileID: 114000010838168942}
   m_Layer: 0
   m_Name: 1Hit
-  m_TagString: Untagged
+  m_TagString: Breakable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eae6bca97ac00f04d8af24b7520e48d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHits: 1
+  hitSprites: []
 --- !u!212 &212000012119776892
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -98,6 +98,6 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4cd75d34eb334804aa345cb175062249, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.86764705, g: 0.68901384, b: 0.68901384, a: 1}
   m_FlipX: 0
   m_FlipY: 0
