@@ -70,6 +70,7 @@ MonoBehaviour:
   hitSprites:
   - {fileID: 21300004, guid: 4cd75d34eb334804aa345cb175062249, type: 3}
   - {fileID: 21300006, guid: 4cd75d34eb334804aa345cb175062249, type: 3}
+  crack: {fileID: 8300000, guid: df0c732875ab4ff44965723b2203ccdd, type: 3}
 --- !u!212 &212000012119776892
 SpriteRenderer:
   m_ObjectHideFlags: 1
