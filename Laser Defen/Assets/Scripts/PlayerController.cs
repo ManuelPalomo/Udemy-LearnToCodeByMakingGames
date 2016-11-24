@@ -3,7 +3,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
-	public GameObject laser;
+	public GameObject projectile;
 	public int speed;
 
 	private float laserSpeed = 5f;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	private void Fire() {
-		GameObject laserInstance = (GameObject)Instantiate(laser, this.transform.position, Quaternion.identity);
+		GameObject laserInstance = (GameObject)Instantiate(projectile, this.transform.position, Quaternion.identity);
 		Rigidbody2D laserRigidbody = laserInstance.GetComponent<Rigidbody2D>();
 		laserRigidbody.velocity = new Vector3(0, laserSpeed, 0);
 		

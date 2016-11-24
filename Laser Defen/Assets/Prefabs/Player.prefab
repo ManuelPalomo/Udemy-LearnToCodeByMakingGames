@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d2852032f735684ebe0cad219b81d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laser: {fileID: 1000010232935476, guid: da3020c782458a64da115095ea019dfb, type: 2}
+  projectile: {fileID: 1000010232935476, guid: da3020c782458a64da115095ea019dfb, type: 2}
   speed: 15
 --- !u!212 &212000011707288918
 SpriteRenderer:
