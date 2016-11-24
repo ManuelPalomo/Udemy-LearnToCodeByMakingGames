@@ -3,7 +3,11 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 
+	public GameObject laser;
 	public int speed;
+
+	private float laserSpeed = 5f;
+	private float firingRate = 0.2f;
 
 	private float maximumXPosition;
 	private float minimumXPosition;
@@ -21,7 +25,9 @@ public class PlayerController : MonoBehaviour {
 
 
 	void Update() {
-		HandleMovement();	
+		HandleMovement();
+		HandleFire();	
+
 	}
 
 	private void HandleMovement() {
@@ -32,6 +38,22 @@ public class PlayerController : MonoBehaviour {
 			MoveLeft();
 		}
 		RestrictMovement();
+	}
+
+	private void HandleFire() {
+		if(Input.GetKeyDown(KeyCode.Space)) {
+			InvokeRepeating("Fire", 0.000001f, firingRate);
+		}
+		if(Input.GetKeyUp(KeyCode.Space)) {
+			CancelInvoke("Fire");
+		}
+	}
+
+	private void Fire() {
+		GameObject laserInstance = (GameObject)Instantiate(laser, this.transform.position, Quaternion.identity);
+		Rigidbody2D laserRigidbody = laserInstance.GetComponent<Rigidbody2D>();
+		laserRigidbody.velocity = new Vector3(0, laserSpeed, 0);
+		
 	}
 
 	private void MoveRight() {
