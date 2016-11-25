@@ -25,6 +25,11 @@ public class EnemySpawner : MonoBehaviour {
 		maximumXPosition = rightMostPosition.x;
 		minimumXPosition = leftMostPosition.x;
 
+		SpawnEnemies();
+	}
+
+
+	private void SpawnEnemies() {
 		foreach(Transform child in this.transform) {
 			GameObject enemy = (GameObject)Instantiate(enemyPrefab, child.transform.position, Quaternion.identity);
 			enemy.transform.parent = child;
@@ -49,6 +54,10 @@ public class EnemySpawner : MonoBehaviour {
 		} else if(rightEdgeFormation > maximumXPosition) {
 			movingRight = false;
 		}
+
+		if(AllMembersDead()) {
+			SpawnEnemies();
+		}
 	}
 
 	private void MoveRight() {
@@ -57,5 +66,14 @@ public class EnemySpawner : MonoBehaviour {
 
 	private void MoveLeft() {
 		transform.position += new Vector3(-speed * Time.deltaTime, 0);
+	}
+
+	private bool AllMembersDead() {
+		foreach(Transform child in this.transform) {
+			if(child.childCount != 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

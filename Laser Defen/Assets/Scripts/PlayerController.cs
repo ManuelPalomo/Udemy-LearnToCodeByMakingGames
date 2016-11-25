@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 	private float maximumXPosition;
 	private float minimumXPosition;
 
+	public int health = 250;
+
 	void Start() {
 		float spritePadding = 1f;
 		float distanceBetweenCameraAndPlayer = transform.position.z - Camera.main.transform.position.z;
@@ -69,5 +71,16 @@ public class PlayerController : MonoBehaviour {
 		this.transform.position = new Vector2(newX, this.transform.position.y);
 	}
 
+	void OnTriggerEnter2D(Collider2D collider) {
+		Projectile projectile = collider.gameObject.GetComponent<Projectile>();
+		if(projectile) {
+			health -= projectile.GetDamage();
+			if(health <= 0) {
+				Destroy(this.gameObject);
+			}
+			projectile.Hit();
+
+		}
+	}
 
 }
