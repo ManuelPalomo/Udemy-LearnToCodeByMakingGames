@@ -12,6 +12,8 @@ public class EnemySpawner : MonoBehaviour {
 
 	private bool movingRight = true;
 
+	public float spawnDelay = 0.5f;
+
 	private float maximumXPosition;
 	private float minimumXPosition;
 
@@ -29,12 +31,7 @@ public class EnemySpawner : MonoBehaviour {
 	}
 
 
-	private void SpawnEnemies() {
-		foreach(Transform child in this.transform) {
-			GameObject enemy = (GameObject)Instantiate(enemyPrefab, child.transform.position, Quaternion.identity);
-			enemy.transform.parent = child;
-		}
-	}
+
 
 	public void OnDrawGizmos() {
 		Gizmos.DrawWireCube(transform.position, new Vector3(width, height, 0));
@@ -56,7 +53,7 @@ public class EnemySpawner : MonoBehaviour {
 		}
 
 		if(AllMembersDead()) {
-			SpawnEnemies();
+			SpawnUntilFull();
 		}
 	}
 
@@ -66,6 +63,34 @@ public class EnemySpawner : MonoBehaviour {
 
 	private void MoveLeft() {
 		transform.position += new Vector3(-speed * Time.deltaTime, 0);
+	}
+
+
+	private void SpawnEnemies() {
+		foreach(Transform child in this.transform) {
+			GameObject enemy = (GameObject)Instantiate(enemyPrefab, child.transform.position, Quaternion.identity);
+			enemy.transform.parent = child;
+		}
+	}
+
+	private void SpawnUntilFull() {
+		Transform freePosition = NextFreePosition();
+		if(freePosition) {
+			GameObject enemy = (GameObject)Instantiate(enemyPrefab, freePosition.position, Quaternion.identity);
+			enemy.transform.parent = freePosition;
+		}
+		if(NextFreePosition()) {
+			Invoke("SpawnUntilFull", spawnDelay);
+		}
+	}
+
+	private Transform NextFreePosition() {
+		foreach(Transform child in this.transform) {
+			if(child.childCount == 0) {
+				return child;
+			}
+		}
+		return null;
 	}
 
 	private bool AllMembersDead() {
