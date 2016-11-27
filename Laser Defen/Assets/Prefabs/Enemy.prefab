@@ -108,6 +108,9 @@ MonoBehaviour:
     type: 2}
   projectileSpeed: 5
   shotsPerSecond: 0.5
+  score: 100
+  firingAudio: {fileID: 8300000, guid: 86ff7e1b08861c74aaa3dedc1784db30, type: 3}
+  explodingAudio: {fileID: 8300000, guid: f8eae7cfe8c15e7459c76a2d282ddfcc, type: 3}
 --- !u!212 &212000011908692152
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,7 +138,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 497483167
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 53914d15e0a3d0b448635e41d5eb6e72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

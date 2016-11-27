@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour {
 
 	public int health = 250;
 
+	public AudioClip firingAudio;
+
 	void Start() {
 		float spritePadding = 1f;
 		float distanceBetweenCameraAndPlayer = transform.position.z - Camera.main.transform.position.z;
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour {
 		GameObject laserInstance = (GameObject)Instantiate(projectile, this.transform.position, Quaternion.identity);
 		Rigidbody2D laserRigidbody = laserInstance.GetComponent<Rigidbody2D>();
 		laserRigidbody.velocity = new Vector3(0, laserSpeed, 0);
+		AudioSource.PlayClipAtPoint(firingAudio,transform.position);
 		
 	}
 
@@ -76,11 +79,18 @@ public class PlayerController : MonoBehaviour {
 		if(projectile) {
 			health -= projectile.GetDamage();
 			if(health <= 0) {
-				Destroy(this.gameObject);
+				Die();
 			}
 			projectile.Hit();
 
 		}
+	}
+
+	private void Die(){
+		LevelManager levelManager=(LevelManager)GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		Destroy(this.gameObject);
+		levelManager.LoadNextLevel();
+
 	}
 
 }

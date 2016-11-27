@@ -7,8 +7,12 @@ public class EnemyController : MonoBehaviour {
 
 	public GameObject projectilePrefab;
 	public float projectileSpeed = 10f;
-
 	public float shotsPerSecond = 0.5f;
+
+	public int score = 100;
+
+	public AudioClip firingAudio;
+	public AudioClip explodingAudio;
 
 	void Update() {
 		float probabilityOfFire = shotsPerSecond * Time.deltaTime;
@@ -21,6 +25,7 @@ public class EnemyController : MonoBehaviour {
 		GameObject projectile = (GameObject)Instantiate(projectilePrefab, this.transform.position, Quaternion.identity);
 		Rigidbody2D projectileRigidbody = projectile.GetComponent<Rigidbody2D>();
 		projectileRigidbody.velocity = new Vector3(0, -projectileSpeed, 0);
+		AudioSource.PlayClipAtPoint(firingAudio, transform.position);
 
 	}
 
@@ -29,10 +34,17 @@ public class EnemyController : MonoBehaviour {
 		if(projectile) {
 			health -= projectile.GetDamage();
 			if(health <= 0) {
-				Destroy(this.gameObject);
+				Die();	
 			}
 			projectile.Hit();
 
 		}
+	}
+
+	private void Die() {
+		AudioSource.PlayClipAtPoint(explodingAudio, transform.position);
+		ScoreKeeper scorekeeper = (ScoreKeeper)GameObject.Find("Score").GetComponent<ScoreKeeper>();
+		scorekeeper.Score(this.score);
+		Destroy(this.gameObject);
 	}
 }
